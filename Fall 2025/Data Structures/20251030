@@ -1,0 +1,171 @@
+/*
+* template STL Map
+* 20251030
+*/
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <map>
+using namespace std;
+
+template<typename KeyType, typename ValueType>
+class dictionary {
+	map<KeyType, ValueType> data;
+public:
+	void add(const KeyType& key, const ValueType& value) {
+		data[key] = value;
+	}
+
+	// return ValueType 
+	ValueType get(const KeyType& key) const {
+		// if no key present
+		auto it = data.find(key);
+		if (it != data.end()) {
+			return it->second;
+		}
+		else {
+			cout << "wrong key\n";
+		}
+		
+		return data[key];
+	}
+
+	bool constiansKey(const KeyType& key) const{
+		return data.find(key) != data.end();
+	}
+
+	void remove(const KeyType& key) {
+		data.erase(key);
+	}
+
+	size_t getSize() {
+		return data.size();
+	}
+
+	void print() const {
+		for (const auto& pair : data) {
+			cout << pair.first << ", " << pair.second << "\n";
+		}
+	}
+};
+
+void app() {
+	dictionary<string, int> ageDictionary;
+	ageDictionary.add("A", 20);
+	ageDictionary.add("B", 30);
+	ageDictionary.add("C", 40);
+	ageDictionary.print();
+	cout << ageDictionary.getSize() << "\n";
+	ageDictionary.remove("A"); 
+	ageDictionary.print();
+	cout << boolalpha;
+	cout << ageDictionary.constiansKey("B") << "\n";
+}
+
+int main() {
+
+	app();
+
+	return 0;
+}
+/*
+* template STL Map
+* 20251030
+*/
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <map>
+
+using namespace std;
+// create a map with templates to store different data types
+template<typename KeyType, typename ValueType>
+// pass by reference map
+void printMap(map<KeyType, ValueType> &m) {
+	for (const auto& pair : m) {
+		cout << pair.first << ", " << pair.second << "\n";
+	}
+	cout << "\n";
+}
+
+template<typename KeyType, typename ValueType>
+bool constiansKey(const map<KeyType, ValueType>& m, const KeyType& key) {
+	/*if (m.find(key) != m.end()) {
+		return true;
+	}
+	else {
+		return false;
+	}*/
+
+	return m.find(key) != m.end();
+}
+
+void app() {
+	map<string, int> stringIntMap{ {"one", 1}, {"two", 2}, {"three", 3} };
+
+	map<int, double> intDoubleMap{ {1, 1.5}, {2, 2.2}, {3, 3.5}, {4, 4.3} };
+
+	printMap(stringIntMap);
+	printMap(intDoubleMap);
+	cout << constiansKey(stringIntMap, string("A")) << "\n";
+}
+
+int main() {
+
+	app();
+
+	return 0;
+}
+/*
+* STL Map
+* 20251030
+*/
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <map>
+
+using namespace std;
+
+void map_operations() {
+	// <key, value>
+	map <string, int> ageMap;
+	ageMap["Bob"] = 28;
+	ageMap["Sarah"] = 25;
+	ageMap["John"] = 21;
+
+	cout << ageMap["Bob"];
+
+	// ageMap.end() holds last key of ageMap
+	// for loop inside .find()
+	// otherwise outside of heapstack
+	if (ageMap.find("Peter") != ageMap.end()) {
+		cout << "\nkey Sarah found" << "\n";
+	}
+	else {
+		cout << "\nkey is not found\n";
+	}
+
+	// print all elements
+	// map object called a pair
+	// .first, .second
+	for (const auto& pair : ageMap) {
+		cout << pair.first << " " << pair.second << "\n";
+	}
+
+	for (auto it = ageMap.begin(); it != ageMap.end(); it++) {
+		cout << it->first << ", " << it->second << "\n";
+	}
+
+	cout << "Size: " << ageMap.size() << "\n";
+}
+
+int main() {
+
+	map_operations();
+
+	return 0;
+}
